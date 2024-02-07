@@ -32,42 +32,7 @@ public class Main {
         System.out.println("What rating do you prefer the restaurant to have? ");
         String userRating =  scanner.nextLine();
 
-//        System.out.println("What is the perferred city of the restaraunt");
-//        String userLocation = scanner.nextLine();
 
-//        System.out.println("How you feelin today what type of restaraunt you feel ex: fast food, casual ex:");
-//        String userVibe = scanner.nextLine();
-
-//        String url = "https://api.yelp.com/v3/businesses/search?location=" + userLocation + "&term=food&radius=" + userDistance+"&categories=" + userCuisine +"&categories=" + userVibe + "&price=" + userPrice + "&sort_by=best_match&limit=1";
-//
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(url))
-//                .header("accept", "application/json")
-//                .header("Authorization", "Bearer QzJetKQ88gshaEO4iRtMTFvbiuLZBEfOY543wNbk1H6TkeigxpI_C1uqyQGuuBMoAgz1J98wNK4ZVpf8d2NCoCvqJN-rw2NAvibG1w4WcKQSEAwjtYni36nOnqW7ZXYx")
-//                .method("GET", HttpRequest.BodyPublishers.noBody())
-//                .build();
-//        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-//
-//        // Parse the JSON response using Gson
-//        Gson gson = new Gson();
-//       apiRequest apiRequest = gson.fromJson(response.body(), apiRequest.class);
-//        System.out.println(response.body());
-//        // Define the Type for a List of Person objects
-//        Type rListType = new TypeToken<List<apiRequest>>() {}.getType();
-//
-//        // Parse JSON array data into a List of Person objects
-//        List<apiRequest> people = gson.fromJson(response.body(), rListType);
-//
-//        if (people != null) {
-//            // Iterate over the list and print information for each person
-//            for (apiRequest person : people) {
-//                System.out.println("Name: " + person.getName());
-//                System.out.println("Id: " + person.getId());
-//            }
-//            }
-//         else {
-//            System.out.println("Parsing failed. Check JSON array data and class structure.");
-//        }
 
 
         // Create an instance of the RecommenderSystem
