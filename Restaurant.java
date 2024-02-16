@@ -19,7 +19,7 @@ public class Restaurant {
 
 
 
-//AIzaSyBCz1Mp7ilrvSUgML8IBEYI1QE4SP55EqY
+
     public Restaurant(String name, String cuisine, String vibe, String price, double distance, Double rating, String address) {
         this.name = name;
         this.cuisine = cuisine;
