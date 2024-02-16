@@ -10,16 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create("https://api.yelp.com/v3/businesses/search?location=Atlanta&term=food&categories=cafe&sort_by=best_match&limit=20"))
-//                .header("accept", "application/json")
-//                .header("Authorization", "Bearer QzJetKQ88gshaEO4iRtMTFvbiuLZBEfOY543wNbk1H6TkeigxpI_C1uqyQGuuBMoAgz1J98wNK4ZVpf8d2NCoCvqJN-rw2NAvibG1w4WcKQSEAwjtYni36nOnqW7ZXYx")
-//                .method("GET", HttpRequest.BodyPublishers.noBody())
-//                .build();
-//        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-//        System.out.println(response.body());
-
-        // DISTANCE(google)  PRICE(1-4)  RATING(1-5) TIME1)5)
+//    
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Cuisine Compass!");
