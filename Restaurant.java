@@ -4,33 +4,30 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Locale;
 
 public class Restaurant {
-//    @SerializedName("name")
-    private String name;
 
+    private String name;
     private String cuisine;
     private String vibe; //
-
-//    @SerializedName("price")
-   private int price; // 1-4
-
-   private int openingTime; // // 24 hour format
-   private int closingTme; // 24 hour format
-   private double distance; // max distance is about 30 miles
-
-//    @SerializedName("rating")
-   private int rating; // 1-5
+    private double rating; // 1-5
     private double utility;
+    private double distance; // max distance is about 30 miles
+    private String price; // 1-4
+    private String address;
 
 
-    public Restaurant(String name, String cuisine, String vibe, int price, int openingTime, int closingTme, double distance, int rating) {
+
+
+
+
+//AIzaSyBCz1Mp7ilrvSUgML8IBEYI1QE4SP55EqY
+    public Restaurant(String name, String cuisine, String vibe, String price, double distance, Double rating, String address) {
         this.name = name;
         this.cuisine = cuisine;
         this.vibe = vibe;
         this.price = price;
-        this.openingTime = openingTime;
-        this.closingTme = closingTme;
         this.distance = distance;
         this.rating = rating;
+        this.address = address;
     }
 
 
@@ -51,28 +48,12 @@ public class Restaurant {
         this.cuisine = cuisine;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
-    }
-
-    public int getOpeningTime() {
-        return openingTime;
-    }
-
-    public void setOpeningTime(int openingTime) {
-        this.openingTime = openingTime;
-    }
-
-    public int getClosingTme() {
-        return closingTme;
-    }
-
-    public void setClosingTme(int closingTme) {
-        this.closingTme = closingTme;
     }
 
     public double getDistance() {
@@ -83,11 +64,11 @@ public class Restaurant {
         this.distance = distance;
     }
 
-    public int getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
@@ -99,6 +80,13 @@ public class Restaurant {
         this.vibe = vibe;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public double getUtility() {
         return utility;
@@ -112,16 +100,17 @@ public class Restaurant {
 //3. Diegos Tacos
 //4. Pedros Tacos
 //5. Akwabe
+
+
     public double calculateUtility(UserPreference userPreferences) {
         if (cuisine.toLowerCase(Locale.ROOT).equals(userPreferences.getPreferredCuisine().toLowerCase(Locale.ROOT))) {
             double distanceUtility = distanceUtility(userPreferences.getMaxDistance(), distance);        //  1.0 / (1.0 + this.distance / userPreferences.getMaxDistance())
-            double priceUtility = priceUtility(userPreferences.getMaximumPrice(), price);
+            double priceUtility = priceUtility(Integer.parseInt(userPreferences.getMaximumPrice()), Integer.parseInt(price));
             double ratingUtility = ratingUtility(userPreferences.getMinimumRating(), rating);
-            double timeUtility = calculateTimeUtility( userPreferences.getPreferredTime(), getOpeningTime(), getClosingTme());
+        //    double timeUtility = calculateTimeUtility( userPreferences.getPreferredTime(), getOpeningTime(), getClosingTme());
             double u = (distanceUtility * userPreferences.getWeightDistance()) +            // (cuisineUtility * userPreferences.getWeightCuisine()
                     (priceUtility * userPreferences.getWeightRating()) +
-                    (ratingUtility * userPreferences.getWeightRating()) +
-                    (timeUtility * userPreferences.getWeightTime());
+                    (ratingUtility * userPreferences.getWeightRating());
             this.setUtility(u);
             System.out.println(u);
             return u;
@@ -133,14 +122,14 @@ public class Restaurant {
 
         }
 
-    public double ratingUtility(double preferredRating, double restaurantRating) {
+    public double ratingUtility(Double preferredRating, Double restaurantRating) {
   //      return Math.exp(-0.5 * Math.pow((preferredRating - restaurantRating) / standardDeviation, 2));
-        return 1.0 / (1.0 + restaurantRating / preferredRating);
+        return 1.0 / (1.0 + ((restaurantRating / preferredRating)));
     }
 
-    public double priceUtility(double preferredPrice, double restaurantPrice) {
+    public double priceUtility(int preferredPrice, int restaurantPrice) {
        // return Math.exp(-0.5 * Math.pow((preferredPrice - restaurantPrice) / standardDeviation, 2));
-          return 1.0 / (1.0 + restaurantPrice / preferredPrice);
+          return 1.0 / (1.0 + (double) (restaurantPrice) / preferredPrice);
     }
 
     public double distanceUtility(double preferredDistance, double restaurantDistance) {
@@ -153,14 +142,14 @@ public class Restaurant {
         }
     }
 
-    private double calculateTimeUtility(int preferredTime, int openingTime, int closingTime) {
-        if (preferredTime < openingTime || preferredTime > closingTime ) {
+  //  private double calculateTimeUtility(int preferredTime, int openingTime, int closingTime) {
+ //       if (preferredTime < openingTime || preferredTime > closingTime ) {
             //    System.out.println("Restaraunt is currently closed ");
-            return 0;
-        }
-        else {
-            return 1;
-            // Assume a simple linear decay function for both opening and closing times
+//            return 0;
+ //       }
+ //       else {
+ //           return 1;
+//            // Assume a simple linear decay function for both opening and closing times
 //                    double openingTimeDecayFactor = 1.0 / (1.0 + Math.abs(openingTime - preferredTime));
 //                    double closingTimeDecayFactor = 1.0 / (1.0 + 2.0 * Math.abs(closingTime - preferredTime));  //  more weight to closing time closer the closing time the least desiered
 //
@@ -170,9 +159,9 @@ public class Restaurant {
 //                    // Combine the weighted opening and closing time utilities
 //                    return (weightedOpeningTimeUtility + weightedClosingTimeUtility) / 2.0;
 
-        }
+//        }
 
-    }
+//    }
 
 
     @Override
@@ -182,8 +171,6 @@ public class Restaurant {
                 ", cuisine='" + cuisine + '\'' +
                 ", vibe='" + vibe + '\'' +
                 ", price=" + price +
-                ", openingTime=" + openingTime +
-                ", closingTme=" + closingTme +
                 ", distance=" + distance +
                 ", rating=" + rating +
                 '}';
@@ -191,3 +178,4 @@ public class Restaurant {
 
 
 }
+
